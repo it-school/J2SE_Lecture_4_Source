@@ -5,18 +5,16 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
-
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-
-       //ArraysExample_1();
-       //ArraysExample_2();
-       //ArraysExample_3();
-       //ArraysExample_4();
-       //ArraysExample_5();
-       //ArraysExample_6();
-       //RandomArray();
+        ArraysExample_1();
+        //ArraysExample_2();
+        //ArraysExample_3();
+        //ArraysExample_4();
+        //ArraysExample_5();
+        //ArraysExample_6();
+        //RandomArray();
 
         //MaxElementInArray();
         //MinElementInArray();
@@ -29,8 +27,8 @@ public class Main {
         //ArraysCompareBikeMethod();
         //ArraysCompareNormalMethod();
 
-        ArrayClone();
-        //ArrayToString();
+        // ArrayClone();
+//        ArrayToString();
         //ArrayReverse();
 
         //ForToForeach();
@@ -42,7 +40,7 @@ public class Main {
 
     // Одномерные массивы. Пример 1
     private static void ArraysExample_1() {
-    // Счёт элементов массива всегда начинается с 0
+        // Счёт элементов массива всегда начинается с 0
 
         System.out.println("\nОдномерные массивы. Пример 1");
 
@@ -138,7 +136,7 @@ public class Main {
         System.out.println("\nЗаполнение массива случайными значениями");
 
         Random random = new Random();
-        int array[] = new int[10];
+        int[] array = new int[10];
 
         for (int i = 0; i < array.length; i++)
             array[i] = random.nextInt(100);
@@ -298,8 +296,8 @@ public class Main {
     private static void ArraysCompareBikeMethod() {
         System.out.println("\nСравнение элементов массивов с помощью велосипеда");
 
-        int a[] = {10, 20, 30};
-        int b[] = {10, 20, 30};
+        int[] a = {10, 20, 30};
+        int[] b = {10, 20, 30};
         boolean flag = true;
 
         for (int i = 0; i < a.length; i++) {
@@ -318,8 +316,8 @@ public class Main {
     // Нормальное сравнение элементов массивов
     private static void ArraysCompareNormalMethod() {
         System.out.println("\nСравнение элементов массивов с помощью Arrays.equals");
-        int a[] = {10, 20, 30};
-        int b[] = {10, 20, 30};
+        int[] a = {10, 20, 30};
+        int[] b = {10, 20, 30};
 
         if (Arrays.equals(a, b))
             System.out.println("Элементы массивов a и b - равны");
@@ -348,11 +346,12 @@ public class Main {
     }
 
     // Преобразование элементов массива в строку
-    private static void ArrayToString(){
+    private static void ArrayToString() {
 
         System.out.println("\nПреобразование элементов массива в строку");
 
-        int[] intArray = { 1, 2, 3, 4, 5 };
+        int[] intArray = {1, 2, 3, 4, 5};
+
         // Создаем строку и инициализируем её строковым представлением
         // элементов массива
         String intArrayString = Arrays.toString(intArray);
@@ -364,16 +363,16 @@ public class Main {
     }
 
     // Реверс элементов массива
-    private static void ArrayReverse(){
+    private static void ArrayReverse() {
         // Данные метод идеален для собеседования
 
         System.out.println("\nРеверс элементов массива");
 
-        int[] a = new int[]{9,8,7,6,5,4,3,2,1};
-        for (int i = 0; i < a.length/2; i++) {
-            a[i] = a[i] + a[a.length-1-i];
-            a[a.length-1-i] = a[i] - a[a.length-1-i];
-            a[i] = a[i] - a[a.length-1-i];
+        int[] a = new int[]{9, 8, 7, 6, 5, 4, 3, 2, 1};
+        for (int i = 0; i < a.length / 2; i++) {
+            a[i] = a[i] + a[a.length - 1 - i];
+            a[a.length - 1 - i] = a[i] - a[a.length - 1 - i];
+            a[i] = a[i] - a[a.length - 1 - i];
         }
 
         System.out.print("Массив после сортировки : ");
@@ -428,7 +427,7 @@ public class Main {
 
         System.out.println("\nТиповая задача из домашнего задания. Пример 1");
 
-        double cost[] = new double[12];
+        double[] cost = new double[12];
         double sum = 0;
 
         // Так как мы изменяем значения элементов массива
@@ -458,7 +457,7 @@ public class Main {
         // Переменная для генерации случайных чисел
         Random random = new Random();
 
-        int array[] = new int[12];
+        int[] array = new int[12];
         // Сумма элементов массива
         int sumOfElemets = 0;
         // Сумма квадратов элементов массива
@@ -478,17 +477,17 @@ public class Main {
 
         System.out.println();
 
-        if (sumOfElemets%2==0)
+        if (sumOfElemets % 2 == 0)
             System.out.println("Cумма элементов массива есть четное число");
         else
             System.out.println("Cумма элементов массива есть нечетное число");
 
-        if(sumOfElementsSqr>=10000)
+        if (sumOfElementsSqr >= 10000)
             System.out.println("Cумма квадратов элементов массива есть пятизначное число");
         else
             System.out.println("Cумма квадратов элементов массива есть не пятизначное число");
 
-        if (sumOfElemets>=0)
+        if (sumOfElemets >= 0)
             System.out.println("Cумма элементов массива неотрицательна");
         else
             System.out.println("Cумма элементов массива отрицательна");
