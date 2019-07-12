@@ -6,9 +6,11 @@ import java.util.Scanner;
 
 public class Main {
     private static Scanner scanner = new Scanner(System.in);
+    private static Random r = new Random();
 
     public static void main(String[] args) {
-        ArraysExample_1();
+
+        //ArraysExample_1();
         //ArraysExample_2();
         //ArraysExample_3();
         //ArraysExample_4();
@@ -27,15 +29,99 @@ public class Main {
         //ArraysCompareBikeMethod();
         //ArraysCompareNormalMethod();
 
-        // ArrayClone();
-//        ArrayToString();
+        //ArrayClone();
+        //ArrayToString();
         //ArrayReverse();
 
         //ForToForeach();
         //SaveOurRAM();
 
+        // Задания для работы в аудитории
+        int[] arr = new int[9];
+        FillArray(arr);
+
+        LessonTask3(arr);
+        LessonTask4(arr);
+        LessonTask5();
+        LessonTask7();
+
+        // Домашние задания
         //Homework_Example_1();
         //Homework_Example_2();
+    }
+
+    private static void LessonTask7() {
+        final int N = 10;
+        float[] H = new float[N], D = new float[N];
+
+        for (int i = 0; i < N; i++) {
+            H[i] = (float) (r.nextInt(100) / 10.0);
+            D[i] = (float) (r.nextInt(100) / 10.0);
+        }
+
+        System.out.println(Arrays.toString(H));
+        System.out.println(Arrays.toString(D));
+
+        SubTask7(H, "H");
+        SubTask7(D, "D");
+    }
+
+    private static void SubTask7(float[] arr, String arrayName) {
+        float[] copyH = arr.clone();
+
+        Arrays.sort(copyH);
+
+        System.out.println("\n" + arrayName + " worst 3: ");
+        for (int i = 0; i < 3; i++)
+            System.out.print(copyH[i] + "\t");
+
+        System.out.println("\n" + arrayName + " best 3: ");
+        for (int i = copyH.length - 1; i > copyH.length - 4; i--)
+            System.out.print(copyH[i] + "\t");
+    }
+
+
+    private static void LessonTask5() {
+        boolean[] month = new boolean[30];
+        int a = 100;
+        for (int i = 0; i < month.length; i++)
+            month[i] = r.nextBoolean();
+
+        System.out.println(Arrays.toString(month));
+
+        for (int i = 0; i < month.length; i++) {
+            a += (month[i] == true ? 2 : -1);
+            if (a > 500)
+                a = 500;
+            else if (a < 0)
+                a = 0;
+        }
+
+        System.out.println("Улитка на высоте " + a + " см");
+    }
+
+    private static void LessonTask3(int[] arr) {
+        int sum = 0;
+        for (int item : arr)
+            if (item % 2 == 0)
+                sum += item;
+        System.out.println("Сумма чётных элементов массива: " + sum);
+    }
+
+    private static void FillArray(int[] arr) {
+        for (int i = 0; i < arr.length; i++)
+            arr[i] = r.nextInt(100);
+
+        System.out.println(Arrays.toString(arr));
+    }
+
+    private static void LessonTask4(int[] arr) {
+        int mult = 1;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] % 9 == 0)
+                mult *= arr[i];
+        }
+        System.out.println(mult);
     }
 
     // Одномерные массивы. Пример 1
@@ -66,9 +152,10 @@ public class Main {
 
         int[] array = new int[5];
 
+        Random rnd = new Random();
         // Заполнение массива.
         for (int i = 0; i < array.length; i++) {
-            array[i] = i * 2;
+            array[i] = rnd.nextInt() % 50;
         }
 
         System.out.print("Массив array : ");
@@ -77,6 +164,9 @@ public class Main {
         for (int i = 0; i < array.length; i++) {
             System.out.print(array[i] + "  ");
         }
+
+        System.out.println();
+        System.out.println(Arrays.toString(array));
     }
 
     // Одномерные массивы. Пример 3
@@ -166,7 +256,6 @@ public class Main {
             if (max_element < a)
                 max_element = a;
         }
-
         System.out.println("\nМаксимальный элемент " + max_element);
     }
 
