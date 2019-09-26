@@ -10,6 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+        ArraysExample_7();
         //ArraysExample_1();
         //ArraysExample_2();
         //ArraysExample_3();
@@ -36,6 +37,7 @@ public class Main {
         //ForToForeach();
         //SaveOurRAM();
 
+/*
         // Задания для работы в аудитории
         int[] arr = new int[9];
         FillArray(arr);
@@ -44,10 +46,102 @@ public class Main {
         LessonTask4(arr);
         LessonTask5();
         LessonTask7();
+*/
 
         // Домашние задания
         //Homework_Example_1();
         //Homework_Example_2();
+    }
+
+    private static void ArraysExample_7() {
+        final int N = 10;
+        float[] A = new float[N];
+        int[] B = new int[N * N * N * N * N * N * N];
+        /*
+        Locale.setDefault(Locale.US);
+        for (int i = 0; i < N; i++) {
+            System.out.print(String.format("%7.2f", (A[i] = (float) (Math.random() * 100))));
+                   }
+        System.out.println();
+        System.out.println(Arrays.toString(A));
+
+        for (float element : A)
+            System.out.print(String.format("%7.2f", element));
+
+
+
+        float temp = 0;
+        for (int i = 0; i < A.length/2; i++) {
+            temp = A[i];
+            A[i] = A[A.length-1-i];
+            A[A.length-1-i] = temp;
+        }
+        System.out.println(Arrays.toString(A));
+*/
+        for (int i = 0; i < B.length; i++) {
+            B[i] = (int) (5 + Math.random() * 100000);
+        }
+        //System.out.println(Arrays.toString(B));
+/*
+
+        for (int i = 0; i < B.length; i++) {
+            if (B[i] == 555) {
+                System.out.println(i);
+                break;
+            }
+        }
+
+        System.out.println(Arrays.binarySearch(B, 555));
+
+        int[] C = B.clone();
+
+        int indexMin = 0;
+        for (int i = 1; i < C.length; i++) {
+            if (C[i] < C[indexMin])
+                indexMin = i;
+        }
+        System.out.println(C[indexMin]);
+       System.out.println();
+        long start = System.currentTimeMillis();
+        Arrays.sort(B);
+        System.out.println(System.currentTimeMillis()-start);
+
+        start = System.currentTimeMillis();
+        Arrays.parallelSort(C);
+        System.out.println(System.currentTimeMillis()-start);*/
+        //LessonTask6();
+
+        int[] arr1 = new int[10];
+        for (int i = 0; i < arr1.length; i++) {
+            arr1[i] = (int) (Math.random() * 1000);
+        }
+        System.out.println(Arrays.toString(arr1));
+
+        int[] arr2 = new int[20];
+        arr2 = Arrays.copyOf(arr1, 5);
+        System.out.println(Arrays.toString(arr2));
+
+        arr1 = arr2;
+        System.out.println(Arrays.toString(arr1));
+    }
+
+    private static void LessonTask6() {
+        final int DAYS = 30;
+        double[] P = new double[DAYS];
+        double[] R = new double[DAYS];
+        double[] Z = new double[DAYS];
+        double sum = 0;
+        for (int i = 0; i < DAYS; i++) {
+            P[i] = (int) (Math.random() * 1000);
+            R[i] = (int) (Math.random() * 1000);
+            sum += (Z[i] = P[i] - R[i]);
+        }
+
+        System.out.println(Arrays.toString(P));
+        System.out.println(Arrays.toString(R));
+        System.out.println(Arrays.toString(Z));
+        System.out.println(sum);
+        System.out.println(sum / DAYS);
     }
 
     private static void LessonTask7() {
