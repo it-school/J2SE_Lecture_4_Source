@@ -18,7 +18,7 @@ public class Main
 //        ArraysExample_4();
 //        ArraysExample_5();
 //        ArraysExample_6();
-		ArraysExample_7();
+//        ArraysExample_7();
 //
 //        RandomArray();
 //
@@ -39,7 +39,10 @@ public class Main
 //
 //        ForToForeach();
 //        SaveOurRAM();
-
+//		ClassWork5();
+//		ClassWork6();
+//		ClassWork7();
+		ClassWork8();
 		// Задания для работы в аудитории
 /*
 		int[] arr = new int[9];
@@ -67,90 +70,167 @@ public class Main
 */
 	}
 
-	private static void ArraysExample_7()
+	private static void ClassWork8()
 	{
-		final int N = 10;
-		float[] A = new float[N];
+		final int N = 15;
+		int[] array = new int[N];
 
-		Locale.setDefault(Locale.US);
+		for (int i = 0; i < array.length; i++) {
+			array[i] = (int) (Math.random() * 100);
+		}
+		Arrays.sort(array);
+		System.out.println(Arrays.toString(array));
+
+		int temp;
+		for (int i = 0; i < array.length / 2; i++) {
+			temp = array[i];
+			array[i] = array[array.length - 1 - i];
+			array[array.length - 1 - i] = temp;
+		}
+
+		System.out.println(Arrays.toString(array));
+	}
+
+	private static void ClassWork7()
+	{
+		final int N = 15, MAXD = 7, MAXL = 3;
+		double[] h = new double[N];
+		double[] d = new double[N];
 		for (int i = 0; i < N; i++) {
-			System.out.print(String.format("%7.2f", (A[i] = (float) (Math.random() * 100))));
+			h[i] = Math.random() * MAXL;
+			d[i] = Math.random() * MAXD;
 		}
 
-		System.out.println();
-		System.out.println(Arrays.toString(A));
+		System.out.println("Прыжки в высоту: ");
+		for (int i = 0; i < N; i++) {
+			System.out.print(String.format("%6.2f", h[i]));
+		}
 
-		for (float element : A) {
-			System.out.print(String.format("%7.2f", element));
+		System.out.println(System.lineSeparator() + "Прыжки в длину: ");
+		for (int i = 0; i < N; i++) {
+			System.out.print(String.format("%6.2f", d[i]));
+		}
+
+		double bestD1 = d[0], bestD2, bestD3;
+		for (int i = 1; i < N; i++) {
+			if (d[i] > bestD1) { bestD1 = d[i]; }
+		}
+		System.out.println(System.lineSeparator() + "1 Лучший в длину: " + String.format("%6.2f", bestD1));
+
+		bestD2 = 0;
+		for (int i = 1; i < N; i++) {
+			if (d[i] > bestD2 && d[i] < bestD1) { bestD2 = d[i]; }
+		}
+		System.out.println("2 Лучший в длину: " + String.format("%6.2f", bestD2));
+
+		bestD3 = 0;
+		for (int i = 1; i < N; i++) {
+			if (d[i] > bestD3 && d[i] < bestD2) { bestD3 = d[i]; }
+		}
+		System.out.println("3 Лучший в длину: " + String.format("%6.2f", bestD3));
+
+		double worstD1 = d[0], worstD2, worstD3;
+		for (int i = 1; i < N; i++) {
+			if (d[i] < worstD1) { worstD1 = d[i]; }
+		}
+		System.out.println(System.lineSeparator() + "1 Худший в длину: " + String.format("%6.2f", worstD1));
+
+		worstD2 = Double.MAX_VALUE;
+		for (int i = 1; i < N; i++) {
+			if (d[i] < worstD2 && d[i] > worstD1) { worstD2 = d[i]; }
+		}
+		System.out.println("2 Худший в длину: " + String.format("%6.2f", worstD2));
+
+		worstD3 = bestD1;
+		for (int i = 1; i < N; i++) {
+			if (d[i] < worstD3 && d[i] > worstD2) { worstD3 = d[i]; }
+		}
+		System.out.println("3 Худший в длину: " + String.format("%6.2f", worstD3));
+
+	}
+
+	private static void ClassWork6()
+	{
+		final int N = 12, INCOME_RANGE = 100_000;
+		double[] r = new double[N];
+		double[] p = new double[N];
+		double[] z = new double[N];
+
+		for (int i = 0; i < N; i++) {
+			r[i] = Math.random() * INCOME_RANGE;
+			p[i] = Math.random() * INCOME_RANGE;
 		}
 
 
-		// Быстрая сортировка массива по возрастанию
-		Arrays.sort(A);
-
-		// Переворот элементов массива
-		float temp = 0;
-		for (int i = 0; i < A.length / 2; i++) {
-			temp = A[i];
-			A[i] = A[A.length - 1 - i];
-			A[A.length - 1 - i] = temp;
+		// System.out.println(Arrays.toString(r));
+		Locale.setDefault(Locale.US);
+		System.out.println("Расходы: ");
+		for (int i = 0; i < N; i++) {
+			System.out.print(String.format("%10.2f", r[i]));
 		}
-		System.out.println(Arrays.toString(A));
-
-
-		int[] B = new int[N * N * N * N * N * N * N];
-		for (int i = 0; i < B.length; i++) {
-			B[i] = (int) (5 + Math.random() * 100000);
+		System.out.println(System.lineSeparator() + "Доходы:  ");
+		for (int i = 0; i < N; i++) {
+			System.out.print(String.format("%10.2f", p[i]));
 		}
-		// System.out.println(Arrays.toString(B));
 
-		System.out.println();
-		// Линейный поиск значения в массиве
-		for (int i = 0; i < B.length; i++) {
-			if (B[i] == 555) {
-				System.out.println("Linear search of 555: " + i);
-				break;
+		double all = 0;
+		int positiveMonths = 0;
+		int indMin = 0, indMax = 0;
+		for (int i = 0; i < N; i++) {
+			z[i] = p[i] - r[i];
+			all += z[i];
+			if (z[i] > 0) { positiveMonths++; }
+			if (z[i] < z[indMin]) { indMin = i; }
+			if (z[i] > z[indMax]) { indMax = i; }
+		}
+		System.out.println(System.lineSeparator() + "Прибыли: ");
+		for (int i = 0; i < N; i++) {
+			System.out.print(String.format("%10.2f", z[i]));
+		}
+		System.out.println(System.lineSeparator() + "Итоговая прибыль: " + String.format("%10.2f", all));
+		System.out.println("Месяц с максимальной прибылью: " + (indMax + 1));
+		System.out.println("Месяц с миниммальной прибылью: " + (indMin + 1));
+		System.out.println("Месяцев с прибылью: " + positiveMonths);
+	}
+
+	private static void ClassWork5()
+	{
+		final int DAYS = 365, A = 100, L = 500;
+		int[] weather = new int[DAYS];
+		int current = A;
+		for (int i = 0; i < weather.length; i++) {
+			weather[i] = (int) (Math.random() * 10) > 3 ? 1 : 0;
+		}
+		System.out.println(Arrays.toString(weather));
+
+		for (int i = 0; i < weather.length; i++) {
+			if (weather[i] == 1) {
+				if (current > 0) { current -= 1; }
 			}
+			else {
+				if (current < L - 2) { current += 2; }
+			}
+			// current += (weather[i] == 1) ? -1 : 2;
 		}
 
+		System.out.println("Was: " + A);
+		System.out.println("Now: " + current);
 
-		// Бинарный поиск вхождения значения в массив
-		System.out.println("Binary search of 555: " + Arrays.binarySearch(B, 555));
-
-
-		// Поиск минимального значения массива
-		int[] C = B.clone();
-
-		int indexMin = 0;
-		for (int i = 1; i < C.length; i++) {
-			if (C[i] < C[indexMin]) { indexMin = i; }
+		Random random = new Random();
+		int dices1, dices2;
+		final int N = 10;
+		int[] dices = new int[N];
+		int max = 0;
+		for (int i = 0; i < N; i++) {
+			dices1 = 1 + random.nextInt(6);
+			dices2 = 1 + random.nextInt(6);
+			System.out.println(dices1 + " : " + dices2);
+			dices[i] = dices1 + dices2;
+			if (dices[i] > max) { max = dices[i]; }
 		}
-		System.out.println("Minimum value: " + C[indexMin]);
-		System.out.println();
-
-
-		// Сравнение обычной сортировки и с использованием распараллеливания
-		long start = System.currentTimeMillis();
-		Arrays.sort(B);
-		System.out.println("Обычная сортировка: " + (System.currentTimeMillis() - start));
-
-		start = System.currentTimeMillis();
-		Arrays.parallelSort(C);
-		System.out.println("Сортировка с распараллеливанием: " + (System.currentTimeMillis() - start));
-
-
-		// Изменение размеров массива
-		int[] arr1 = new int[N];
-		for (int i = 0; i < arr1.length; i++) {
-			arr1[i] = (int) (Math.random() * 1000);
+		for (int i = 0; i < N; i++) {
+			if (dices[i] == max) { System.out.println("Winner is:" + i); }
 		}
-		System.out.println("Initial array:                 " + Arrays.toString(arr1));
-
-		int[] arr2 = Arrays.copyOf(arr1, 5);
-		System.out.println("Subcopy of initial array:      " + Arrays.toString(arr2));
-
-		arr1 = arr2;
-		System.out.println("Resized copy of initial array: " + Arrays.toString(arr1));
 	}
 
 	private static void FillArray(int[] arr)
@@ -233,8 +313,6 @@ public class Main
 		SubTask7(D, "D");
 	}
 
-	// Одномерные массивы. Пример 1
-
 	private static void SubTask7(float[] arr, String arrayName)
 	{
 		float[] copyH = arr.clone();
@@ -247,7 +325,8 @@ public class Main
 		System.out.println("\n" + arrayName + " best 3: ");
 		for (int i = copyH.length - 1; i > copyH.length - 4; i--) { System.out.print(copyH[i] + "\t"); }
 	}
-	// Одномерные массивы. Пример 2
+
+	// Одномерные массивы. Пример 1
 
 	private static void ArraysExample_1()
 	{
@@ -270,7 +349,7 @@ public class Main
 		System.out.print(array[3] + " ");
 		System.out.print(array[4] + " ");
 	}
-	// Одномерные массивы. Пример 3
+	// Одномерные массивы. Пример 2
 
 	private static void ArraysExample_2()
 	{
@@ -294,7 +373,7 @@ public class Main
 		System.out.println();
 		System.out.println(Arrays.toString(array));
 	}
-	// Одномерные массивы. Пример 4
+	// Одномерные массивы. Пример 3
 
 	private static void ArraysExample_3()
 	{
@@ -309,7 +388,7 @@ public class Main
 			System.out.print(array[i] + "  ");
 		}
 	}
-	// Одномерные массивы. Пример 5
+	// Одномерные массивы. Пример 4
 
 	private static void ArraysExample_4()
 	{
@@ -324,7 +403,7 @@ public class Main
 			System.out.print(array[i] + "  ");
 		}
 	}
-	// Одномерные массивы. Пример 6
+	// Одномерные массивы. Пример 5
 
 	private static void ArraysExample_5()
 	{
@@ -339,7 +418,7 @@ public class Main
 			System.out.print(array[i] + "  ");
 		}
 	}
-	// Заполнение массива случайными значениями
+	// Одномерные массивы. Пример 6
 
 	private static void ArraysExample_6()
 	{
@@ -350,7 +429,7 @@ public class Main
 
 		System.out.println("Массив vector : " + vector[0]);
 	}
-	// Максимальный элемент в массиве
+	// Заполнение массива случайными значениями
 
 	private static void RandomArray()
 	{
@@ -367,7 +446,7 @@ public class Main
 			System.out.print(a + " ");
 		}
 	}
-	// Минимальный элемент в массиве
+	// Максимальный элемент в массиве
 
 	private static void MaxElementInArray()
 	{
@@ -388,7 +467,7 @@ public class Main
 		}
 		System.out.println("\nМаксимальный элемент " + max_element);
 	}
-	// Среднее арифметическое в массиве
+	// Минимальный элемент в массиве
 
 	private static void MinElementInArray()
 	{
@@ -410,7 +489,7 @@ public class Main
 
 		System.out.println("\nМинимальный элемент " + min_element);
 	}
-	// Сортировка пузырьком - от большего к меньшему
+	// Среднее арифметическое в массиве
 
 	private static void Average()
 	{
@@ -432,7 +511,7 @@ public class Main
 		sum = sum / nums.length; // общий результат делим на число элементов в массиве
 		System.out.println("Среднее арифметическое: " + String.format("%5.2f", sum));
 	}
-	// Сортировка пузырьком - от меньшего к большему
+	// Сортировка пузырьком - от большего к меньшему
 
 	private static void BubbleSortForMaxToMin()
 	{
@@ -461,7 +540,7 @@ public class Main
 		System.out.print("\nПосле сортировки : ");
 		for (int a : num) { System.out.print(a + " "); }
 	}
-	// Сортировка QuickSort
+	// Сортировка пузырьком - от меньшего к большему
 
 	private static void BubbleSortForMinToMax()
 	{
@@ -490,7 +569,7 @@ public class Main
 		System.out.print("\nПосле сортировки : ");
 		for (int a : num) { System.out.print(a + " "); }
 	}
-	// Сравнение элементов массивов с помощью велосипеда
+	// Сортировка QuickSort
 
 	private static void QuickSort()
 	{
@@ -510,7 +589,7 @@ public class Main
 			System.out.print(a + " ");
 		}
 	}
-	// Нормальное сравнение элементов массивов
+	// Сравнение элементов массивов с помощью велосипеда
 
 	private static void ArraysCompareBikeMethod()
 	{
@@ -530,7 +609,7 @@ public class Main
 		if (flag) { System.out.println("Элементы массивов a и b - равны"); }
 		else { System.out.println("Элементы массивов a и b - не равны"); }
 	}
-	// Клонирование массива
+	// Нормальное сравнение элементов массивов
 
 	private static void ArraysCompareNormalMethod()
 	{
@@ -541,7 +620,7 @@ public class Main
 		if (Arrays.equals(a, b)) { System.out.println("Элементы массивов a и b - равны"); }
 		else { System.out.println("Элементы массивов a и b - не равны"); }
 	}
-	// Преобразование элементов массива в строку
+	// Клонирование массива
 
 	private static void ArrayClone()
 	{
@@ -562,7 +641,7 @@ public class Main
 		System.out.println("Ссылка а и b указывают на один массив - " +
 				(a.hashCode() == b.hashCode()));
 	}
-	// Реверс элементов массива
+	// Преобразование элементов массива в строку
 
 	private static void ArrayToString()
 	{
@@ -580,7 +659,7 @@ public class Main
 		// Выводим строку intArrayString на экран
 		System.out.println(intArrayString); // [1, 2, 3, 4, 5]
 	}
-	// Переход от for к foreach
+	// Реверс элементов массива
 
 	private static void ArrayReverse()
 	{
@@ -598,7 +677,7 @@ public class Main
 		System.out.print("Массив после сортировки : ");
 		System.out.println(Arrays.toString(a));
 	}
-	// Оптимизируем выделение оперативной памяти
+	// Переход от for к foreach
 
 	private static void ForToForeach()
 	{
@@ -625,6 +704,7 @@ public class Main
 			a = 20;
 		}
 	}
+	// Оптимизируем выделение оперативной памяти
 
 	private static void SaveOurRAM()
 	{
@@ -638,6 +718,131 @@ public class Main
 		short[] a_short = new short[N]; // Займет в памяти 20000 байтов
 		int[] a_int = new int[N];       // Займет в памяти 40000 байтов
 		long[] a_long = new long[N];    // Займет в памяти 80000 байтов
+
+	}
+
+	private static void ArraysExample_7()
+	{
+		final int N = 10;
+		float[] A = new float[N];
+
+		Locale.setDefault(Locale.US);
+		for (int i = 0; i < N; i++) {
+			System.out.print(String.format("%7.2f", (A[i] = (float) (Math.random() * 100))));
+		}
+
+		System.out.println();
+		System.out.println(Arrays.toString(A));
+
+		for (float element : A) {
+			System.out.print(String.format("%7.2f", element));
+		}
+
+
+		// Быстрая сортировка массива по возрастанию
+		Arrays.sort(A);
+
+		// Переворот элементов массива
+		float temp = 0;
+		for (int i = 0; i < A.length / 2; i++) {
+			temp = A[i];
+			A[i] = A[A.length - 1 - i];
+			A[A.length - 1 - i] = temp;
+		}
+		System.out.println(Arrays.toString(A));
+
+
+		int[] B = new int[N * N * N * N * N * N * N];
+		for (int i = 0; i < B.length; i++) {
+			B[i] = (int) (5 + Math.random() * 100000);
+		}
+		// System.out.println(Arrays.toString(B));
+/*
+		System.out.println();
+		int n = 0;
+		// Линейный поиск значения в массиве
+		for (int i = 0; i < B.length; i++) {
+			if (B[i] == 555) {
+				System.out.println("Linear search of 555: " + i);
+				n++;
+				// break;
+			}
+		}
+
+		// Линейный поиск значения в массиве в обратном порядке
+		for (int i = B.length-1; i > 0; i--) {
+			if (B[i] == 555) {
+				System.out.println("Linear search of 555: " + i);
+				n++;
+				break;
+			}
+		}
+
+		System.out.println(n);
+Arrays.sort(B);
+		// Бинарный поиск вхождения значения в массив
+		System.out.println("Binary search of 555: " + Arrays.binarySearch(B, 555));
+
+
+
+		// Для всех элементов
+		int n = 0;
+		for (int i = 0; i < A.length - 1; i++)
+		{
+			for (int j = (A.length - 1); j > i; j--) // для всех элементов после i-ого
+			{
+				if (A[j - 1] > A[j]) // если текущий элемент меньше предыдущего
+				{
+					temp = A[j - 1]; // меняем их местами
+					A[j - 1] = A[j];
+					A[j] = temp;
+				}
+				n++;
+			}
+		}
+		System.out.println(Arrays.toString(A));
+		System.out.println(n);
+ */
+
+		// Поиск минимального значения массива
+		int[] C = B.clone();
+		int indexMin = 0;
+		for (int i = 1; i < C.length; i++) {
+			if (C[i] <= C[indexMin]) {
+				indexMin = i;
+				break;
+			}
+
+		}
+		System.out.println("Minimum value: " + C[indexMin] + ", it's index is: " + indexMin);
+		System.out.println();
+
+
+		// Сравнение обычной сортировки и с использованием распараллеливания
+		long start = System.currentTimeMillis();
+		Arrays.sort(B);
+		System.out.println("Обычная сортировка: " + (System.currentTimeMillis() - start));
+
+		start = System.currentTimeMillis();
+		Arrays.parallelSort(C);
+		System.out.println("Сортировка с распараллеливанием: " + (System.currentTimeMillis() - start));
+
+
+		// Изменение размеров массива
+		int[] arr1 = new int[N];
+		for (int i = 0; i < arr1.length; i++) {
+			arr1[i] = (int) (Math.random() * 1000);
+		}
+		System.out.println("Initial array:                 " + Arrays.toString(arr1));
+
+		int[] arr2 = Arrays.copyOf(arr1, 5);
+		System.out.println("Subcopy of initial array:      " + Arrays.toString(arr2));
+
+		arr1 = arr2;
+		System.out.println("Resized copy of initial array: " + Arrays.toString(arr1));
+		arr2[3] = 555;
+		System.out.println("Resized copy of initial array: " + Arrays.toString(arr1));
+
 
 	}
 
