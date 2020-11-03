@@ -1,4 +1,4 @@
-package com.easylabs;
+package com.itschool;
 
 import java.util.Arrays;
 import java.util.Locale;
@@ -39,60 +39,138 @@ public class Main
 //
 //        ForToForeach();
 //        SaveOurRAM();
-//		ClassWork5();
-//		ClassWork6();
-//		ClassWork7();
-		ClassWork8();
-		// Задания для работы в аудитории
-/*
-		int[] arr = new int[9];
+
+//       Задания для работы в аудитории
+
+		int[] arr = new int[10];
 		FillArray(arr);
 
-        LessonTask3(arr);
-        LessonTask4(arr);
-        LessonTask5();
-        LessonTask6();
-        LessonTask7();
-*/
+		ClassWork3(arr);
+		ClassWork4(arr);
+		ClassWork5();
+		ClassWork6();
+		ClassWork7();
+		ClassWork7a();  // С использованием сортировки и выбором 3 крайних значений
+		ClassWork8();
 
 		// Домашние задания
 //        Homework_Example_1();
 //        Homework_Example_2();
-/*
-		float a = 5.00000001f;
-		float b = 7.00000000f;
-		System.out.println(a + "  " + b);
-
-		a = a + b;
-		b = a - b;
-		a = a - b;
-		System.out.println(a + "  " + b);
-*/
 	}
 
-	private static void ClassWork8()
+	private static void FillArray(int[] arr)
 	{
-		final int N = 15;
-		int[] array = new int[N];
-
-		for (int i = 0; i < array.length; i++) {
-			array[i] = (int) (Math.random() * 100);
+		for (int i = 0; i < arr.length; i++) {
+			arr[i] = r.nextInt(100);
+			System.out.print(arr[i] + ", ");
 		}
-		Arrays.sort(array);
-		System.out.println(Arrays.toString(array));
+		System.out.println();
+		// System.out.println(Arrays.toString(arr));
+	}
 
-		int temp;
-		for (int i = 0; i < array.length / 2; i++) {
-			temp = array[i];
-			array[i] = array[array.length - 1 - i];
-			array[array.length - 1 - i] = temp;
+	private static void ClassWork3(int[] arr)
+	{
+		int sum = 0;
+		for (int item : arr) { if (item % 2 == 0) { sum += item; } }
+		System.out.println("Сумма чётных элементов массива: " + sum);
+		System.out.println();
+	}
+
+	private static void ClassWork4(int[] arr)
+	{
+		int mult = 1;
+		for (int i = 0; i < arr.length; i++) {
+			if (arr[i] % 9 == 0) { mult *= arr[i]; }
+		}
+		System.out.println();
+		System.out.println("Произведение всех элементов массива со значениями, кратными 9: " + mult);
+	}
+
+	private static void ClassWork5()
+	{
+		final int DAYS = 365, A = 100, L = 500;
+		int[] weather = new int[DAYS];
+		int current = A;
+		for (int i = 0; i < weather.length; i++) {
+			weather[i] = (int) (Math.random() * 10) > 3 ? 1 : 0;
+		}
+		System.out.println(Arrays.toString(weather));
+
+		for (int i = 0; i < weather.length; i++) {
+			current += (weather[i] == 1) ? -1 : 2;
+			if (current > L) { current = L; }
+			else if (current < 0) { current = 0; }
 		}
 
-		System.out.println(Arrays.toString(array));
+		System.out.println("Улитка начала с точки: " + A + " см");
+		System.out.println("Закончила на высоте:   " + current + " см");
+
+		/*
+		// Определить победителя в кубики из N игроков
+		Random random = new Random();
+		int dices1, dices2;
+		final int N = 10;
+		int[] dices = new int[N];
+		int max = 0;
+		for (int i = 0; i < N; i++) {
+			dices1 = 1 + random.nextInt(6);
+			dices2 = 1 + random.nextInt(6);
+			System.out.println(dices1 + " : " + dices2);
+			dices[i] = dices1 + dices2;
+			if (dices[i] > max) { max = dices[i]; }
+		}
+		for (int i = 0; i < N; i++) {
+			if (dices[i] == max) { System.out.println("Winner is:" + i); }
+		}
+		*/
+	}
+
+	private static void ClassWork6()
+	{
+		final int N = 12, INCOME_RANGE = 100_000;
+		double[] r = new double[N];
+		double[] p = new double[N];
+		double[] z = new double[N];
+
+		for (int i = 0; i < N; i++) {
+			r[i] = Math.random() * INCOME_RANGE;
+			p[i] = Math.random() * INCOME_RANGE;
+		}
+
+		// System.out.println(Arrays.toString(r));
+		Locale.setDefault(Locale.US);
+		System.out.println("Расходы: ");
+		for (int i = 0; i < N; i++) {
+			System.out.print(String.format("%10.2f", r[i]));
+		}
+		System.out.println(System.lineSeparator() + "Доходы:  ");
+		for (int i = 0; i < N; i++) {
+			System.out.print(String.format("%10.2f", p[i]));
+		}
+
+		double all = 0;
+		int positiveMonths = 0;
+		int indMin = 0, indMax = 0;
+		for (int i = 0; i < N; i++) {
+			z[i] = p[i] - r[i];
+			all += z[i];
+			if (z[i] > 0) { positiveMonths++; }
+			if (z[i] < z[indMin]) { indMin = i; }
+			if (z[i] > z[indMax]) { indMax = i; }
+		}
+		System.out.println(System.lineSeparator() + "Прибыли: ");
+		for (int i = 0; i < N; i++) {
+			System.out.print(String.format("%10.2f", z[i]));
+		}
+		System.out.println(System.lineSeparator() + "Итоговая прибыль: " + String.format("%10.2f", all));
+		System.out.println("Месяц с максимальной прибылью: " + (indMax + 1));
+		System.out.println("Месяц с миниммальной прибылью: " + (indMin + 1));
+		System.out.println("Месяцев с прибылью: " + positiveMonths);
 	}
 
 	private static void ClassWork7()
 	{
+		System.out.println();
 		final int N = 15, MAXD = 7, MAXL = 3;
 		double[] h = new double[N];
 		double[] d = new double[N];
@@ -149,114 +227,44 @@ public class Main
 
 	}
 
-	private static void ClassWork6()
+	private static void ClassWork7a()
 	{
-		final int N = 12, INCOME_RANGE = 100_000;
-		double[] r = new double[N];
-		double[] p = new double[N];
-		double[] z = new double[N];
-
-		for (int i = 0; i < N; i++) {
-			r[i] = Math.random() * INCOME_RANGE;
-			p[i] = Math.random() * INCOME_RANGE;
-		}
-
-
-		// System.out.println(Arrays.toString(r));
-		Locale.setDefault(Locale.US);
-		System.out.println("Расходы: ");
-		for (int i = 0; i < N; i++) {
-			System.out.print(String.format("%10.2f", r[i]));
-		}
-		System.out.println(System.lineSeparator() + "Доходы:  ");
-		for (int i = 0; i < N; i++) {
-			System.out.print(String.format("%10.2f", p[i]));
-		}
-
-		double all = 0;
-		int positiveMonths = 0;
-		int indMin = 0, indMax = 0;
-		for (int i = 0; i < N; i++) {
-			z[i] = p[i] - r[i];
-			all += z[i];
-			if (z[i] > 0) { positiveMonths++; }
-			if (z[i] < z[indMin]) { indMin = i; }
-			if (z[i] > z[indMax]) { indMax = i; }
-		}
-		System.out.println(System.lineSeparator() + "Прибыли: ");
-		for (int i = 0; i < N; i++) {
-			System.out.print(String.format("%10.2f", z[i]));
-		}
-		System.out.println(System.lineSeparator() + "Итоговая прибыль: " + String.format("%10.2f", all));
-		System.out.println("Месяц с максимальной прибылью: " + (indMax + 1));
-		System.out.println("Месяц с миниммальной прибылью: " + (indMin + 1));
-		System.out.println("Месяцев с прибылью: " + positiveMonths);
-	}
-
-	private static void ClassWork5()
-	{
-		final int DAYS = 365, A = 100, L = 500;
-		int[] weather = new int[DAYS];
-		int current = A;
-		for (int i = 0; i < weather.length; i++) {
-			weather[i] = (int) (Math.random() * 10) > 3 ? 1 : 0;
-		}
-		System.out.println(Arrays.toString(weather));
-
-		for (int i = 0; i < weather.length; i++) {
-			if (weather[i] == 1) {
-				if (current > 0) { current -= 1; }
-			}
-			else {
-				if (current < L - 2) { current += 2; }
-			}
-			// current += (weather[i] == 1) ? -1 : 2;
-		}
-
-		System.out.println("Was: " + A);
-		System.out.println("Now: " + current);
-
-		Random random = new Random();
-		int dices1, dices2;
-		final int N = 10;
-		int[] dices = new int[N];
-		int max = 0;
-		for (int i = 0; i < N; i++) {
-			dices1 = 1 + random.nextInt(6);
-			dices2 = 1 + random.nextInt(6);
-			System.out.println(dices1 + " : " + dices2);
-			dices[i] = dices1 + dices2;
-			if (dices[i] > max) { max = dices[i]; }
-		}
-		for (int i = 0; i < N; i++) {
-			if (dices[i] == max) { System.out.println("Winner is:" + i); }
-		}
-	}
-
-	private static void FillArray(int[] arr)
-	{
-		for (int i = 0; i < arr.length; i++) {
-			arr[i] = r.nextInt(100);
-			System.out.print(arr[i] + ", ");
-		}
 		System.out.println();
-		System.out.println(Arrays.toString(arr));
-	}
+		final int N = 10;
+		float[] H = new float[N], D = new float[N];
 
-	private static void LessonTask3(int[] arr)
-	{
-		int sum = 0;
-		for (int item : arr) { if (item % 2 == 0) { sum += item; } }
-		System.out.println("Сумма чётных элементов массива: " + sum);
-	}
-
-	private static void LessonTask4(int[] arr)
-	{
-		int mult = 1;
-		for (int i = 0; i < arr.length; i++) {
-			if (arr[i] % 9 == 0) { mult *= arr[i]; }
+		for (int i = 0; i < N; i++) {
+			H[i] = (float) (r.nextInt(100) / 10.0);
+			D[i] = (float) (r.nextInt(100) / 10.0);
 		}
-		System.out.println(mult);
+
+		System.out.println(Arrays.toString(H));
+		System.out.println(Arrays.toString(D));
+
+		SubTask7(H, "H");
+		SubTask7(D, "D");
+	}
+
+	private static void ClassWork8()
+	{
+		System.out.println();
+		final int N = 15;
+		int[] array = new int[N];
+
+		for (int i = 0; i < array.length; i++) {
+			array[i] = (int) (Math.random() * 100);
+		}
+		Arrays.sort(array);
+		System.out.println(Arrays.toString(array));
+
+		int temp;
+		for (int i = 0; i < array.length / 2; i++) {
+			temp = array[i];
+			array[i] = array[array.length - 1 - i];
+			array[array.length - 1 - i] = temp;
+		}
+
+		System.out.println(Arrays.toString(array));
 	}
 
 	private static void LessonTask5()
@@ -274,43 +282,6 @@ public class Main
 		}
 
 		System.out.println("Улитка на высоте " + a + " см");
-	}
-
-	private static void LessonTask6()
-	{
-		final int DAYS = 30;
-		double[] P = new double[DAYS];
-		double[] R = new double[DAYS];
-		double[] Z = new double[DAYS];
-		double sum = 0;
-		for (int i = 0; i < DAYS; i++) {
-			P[i] = (int) (Math.random() * 1000);
-			R[i] = (int) (Math.random() * 1000);
-			sum += (Z[i] = P[i] - R[i]);
-		}
-
-		System.out.println(Arrays.toString(P));
-		System.out.println(Arrays.toString(R));
-		System.out.println(Arrays.toString(Z));
-		System.out.println(sum);
-		System.out.println(sum / DAYS);
-	}
-
-	private static void LessonTask7()
-	{
-		final int N = 10;
-		float[] H = new float[N], D = new float[N];
-
-		for (int i = 0; i < N; i++) {
-			H[i] = (float) (r.nextInt(100) / 10.0);
-			D[i] = (float) (r.nextInt(100) / 10.0);
-		}
-
-		System.out.println(Arrays.toString(H));
-		System.out.println(Arrays.toString(D));
-
-		SubTask7(H, "H");
-		SubTask7(D, "D");
 	}
 
 	private static void SubTask7(float[] arr, String arrayName)
